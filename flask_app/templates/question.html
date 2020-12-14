@@ -1,0 +1,76 @@
+{% extends "header.html" %}
+{% block content %}
+
+{% if error_msg %}
+<b>{{ error_msg }}</b>
+{% endif %}
+
+{% if question %}
+{# Display the question #}
+<div class="row">
+  <div class="col">
+    <div class="card text-center">
+      <div class="card-header">
+        <h2>{{ question.content }}</h2>
+      </div>
+    </div>
+  </div>
+</div>
+<div>
+  Asked by
+  <a href="{{ url_for('questions.user_detail', username=question.user.username) }}">
+    <strong>@{{ question.user.username }}</strong>
+  </a>
+</div>
+<br><br>
+
+{# Answers #}
+<div class="row">
+  <div class="col-md-12">
+    <h1> Answers <small class="float-right">{{ answers|length }} answers</small></h1>
+    <ul class="media-list">
+      {% for answer in answers %}
+      <li class="media post-item">
+        <div class="media-body">
+          <span class="float-right">
+            <small>{{ answer.date }}</small>
+          </span>
+          <a href="{{ url_for('questions.user_detail', username=answer.user.username) }}">
+            <strong>@{{ answer.user.username }}</strong>
+          </a>
+          <p>
+            {{ answer.content }}
+          </p>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+{% if current_user.is_authenticated %}
+{# Answer submission form #}
+<div class="row">
+  <div class="col">
+    <form method="POST" action="">
+      {{ form.csrf_token }}
+      <div class="form-group">
+        {{ form.text.label }}
+        {{ form.text(class="form-control") }}
+
+        {% if form.text.errors %}
+        <div class="alert alert-warning" role="alert">
+          {% for error in form.text.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+      </div>
+      {{ form.submit() }}
+    </form>
+  </div>
+</div>
+{% endif %}
+{% endif %}
+{% endblock content %}

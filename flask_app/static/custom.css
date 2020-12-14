@@ -1,0 +1,17 @@
+
+.card-body > img {
+    max-width: 200;
+}
+
+.media-list {
+    border-top: 1px dashed rgb(150, 150, 150);
+}
+
+.post-item {
+    border-bottom: 1px dashed #a5a5a5;
+}
+
+.token {
+    max-width: 800;
+    word-wrap: break-word;
+}
