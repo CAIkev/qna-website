@@ -17,7 +17,7 @@ keyring==10.6.0
 keyrings.alt==3.0
 MarkupSafe==1.1.1
 pycrypto==2.6.1
-pygobject==3.26.1
+pygobject==3.27.0
 pyinotify==0.9.6
 pyOpenSSL==17.5.0
 PySimpleGUI==4.29.0
